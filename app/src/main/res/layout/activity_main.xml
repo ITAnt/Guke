@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_white">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_main"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/color_white">
+    </android.support.v4.view.ViewPager>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/color_bg"
+        android:layout_marginBottom="3dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:paddingBottom="2dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="@dimen/text_size_bottom_image"
+                android:layout_height="@dimen/text_size_bottom_image"
+                android:scaleType="fitXY"
+                android:background="@mipmap/say_normal"/>
+
+            <TextView
+                android:textSize="@dimen/text_size_bottom_text"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_bg"
+                android:text="客说"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerInParent="true">
+            <ImageView
+                android:layout_width="@dimen/text_size_bottom_image"
+                android:layout_height="@dimen/text_size_bottom_image"
+                android:scaleType="fitXY"
+                android:background="@mipmap/click_normal"/>
+
+            <TextView
+                android:textSize="@dimen/text_size_bottom_text"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_bg"
+                android:text="点点"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentRight="true">
+            <ImageView
+                android:layout_width="@dimen/text_size_bottom_image"
+                android:layout_height="@dimen/text_size_bottom_image"
+                android:scaleType="fitXY"
+                android:background="@mipmap/me_normal"/>
+
+            <TextView
+                android:textSize="@dimen/text_size_bottom_text"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="我"
+                android:textColor="@color/color_bg"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

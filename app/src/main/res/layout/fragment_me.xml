@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/grey_light">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@color/color_bg"
+        android:layout_marginBottom="@dimen/margin_bottom">
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_grid"
+        android:descendantFocusability="blocksDescendants"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/selector_grid"
+        android:padding="@dimen/padding_bottom">
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:textColor="@color/color_bg_pressed"
+            android:background="@drawable/shape_yi_ji"
+            android:gravity="center"
+            android:text="赞助"/>
+    </LinearLayout>
+
+</LinearLayout>
