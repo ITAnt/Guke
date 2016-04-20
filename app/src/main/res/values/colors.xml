@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="color_bg">#b2a07c</color>
+    <color name="color_bg_light">#33b2a07c</color>
     <color name="color_transparent">#00000000</color>
     <color name="color_bg_pressed">#999966</color>
     <color name="color_white">#ffffff</color>

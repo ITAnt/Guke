@@ -4,7 +4,8 @@
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
             <corners android:radius="@dimen/radius_title"></corners>
-            <solid android:color="@color/color_bg"></solid>
+            <solid android:color="@color/color_bg_light"></solid>
+            <stroke android:color="@color/color_bg" android:dashGap="@dimen/dash_width" android:width="@dimen/dash_width"></stroke>
         </shape>
     </item>
 
