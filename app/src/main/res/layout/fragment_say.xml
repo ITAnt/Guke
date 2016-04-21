@@ -8,7 +8,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"
-        android:background="@color/color_bg">
+        android:background="@color/color_bg"
+        android:layout_marginBottom="@dimen/margin_bottom">
 
         <TextView
             android:layout_width="wrap_content"
@@ -33,5 +34,6 @@
         android:paddingRight="@dimen/padding_right"
         android:paddingTop="@dimen/padding_top"
         android:paddingBottom="@dimen/padding_bottom"
-        android:text="我们都是孤独的人，孤独的人不畏惧负能量，因为相信负负得正。在这里，你可以发表脑洞大开的灵感，或者遇到的负能量。"/>
+        android:gravity="center"
+        android:text="即将推出，敬请关注。"/>
 </LinearLayout>

@@ -1,14 +1,15 @@
-package com.tongcent.guke;
+package com.tongcent.guke.activity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 
+import com.tongcent.guke.R;
+import com.tongcent.guke.adapter.PagerAdapter;
 import com.tongcent.guke.fragment.ClickFragment;
 import com.tongcent.guke.fragment.MeFragment;
 import com.tongcent.guke.fragment.SayFragment;
-import com.tongcent.guke.adapter.PagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

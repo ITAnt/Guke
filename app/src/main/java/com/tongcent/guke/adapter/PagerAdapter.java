@@ -1,33 +1,34 @@
 package com.tongcent.guke.adapter;
 
+import java.util.List;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import java.util.List;
-
-/**
- * Created by Jason on 2016/4/18.
- */
 public class PagerAdapter extends FragmentPagerAdapter {
-    private List<Fragment> fragments;
 
-    public PagerAdapter(FragmentManager fm) {
-        super(fm);
-    }
+	private List<Fragment> mFragments;
+	
+	public PagerAdapter(FragmentManager fragmentManager) {
+		super(fragmentManager);
+	}
+	
+	public PagerAdapter(FragmentManager fragmentManager, List<Fragment> fragments) {
+		super(fragmentManager);
+		this.mFragments = fragments;
+	}
 
-    public PagerAdapter(FragmentManager fm, List<Fragment> fragments) {
-        super(fm);
-        this.fragments = fragments;
-    }
+	@Override
+	public Fragment getItem(int index) {
+		// TODO Auto-generated method stub
+		return mFragments.get(index);
+	}
 
-    @Override
-    public Fragment getItem(int position) {
-        return fragments.get(position);
-    }
-
-    @Override
-    public int getCount() {
-        return fragments.size();
-    }
+	@Override
+	public int getCount() {
+		// TODO Auto-generated method stub
+		return mFragments.size();
+	}
+	
 }

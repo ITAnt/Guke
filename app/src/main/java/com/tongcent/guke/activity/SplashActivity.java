@@ -1,13 +1,9 @@
 package com.tongcent.guke.activity;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.FragmentActivity;
-import android.view.WindowManager;
 
-import com.tongcent.guke.MainActivity;
 import com.tongcent.guke.R;
 
 public class SplashActivity extends BaseActivity {
