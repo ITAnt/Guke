@@ -115,7 +115,7 @@ service salt-master restart
 echo 'I am test file. ' > /opt/test.txt
 	运行如下命令查看测试文件的内容：
 cat /opt/test.txt
-5.4 同步文件
+5.4 文件分发
 主控端运行如下命令，将test.txt复制到到我们在4.1中指定的同步目录下：
 cp /opt/test.txt /srv/salt/
 接着在主控端运行如下命令，将文件同步到受控端ubuntu-minion-001的/tmp/目录下：
@@ -145,7 +145,7 @@ echo 'hello2 word !!' >>/srv/salt/test_dir/hello2.txt
 ll /srv/salt/test_dir/
  
 没有问题。
-6.2 分发
+6.2 目录分发
 执行目录文件的分发，并使用压缩传输：
 salt 'ubuntu-minion-001' cp.get_dir salt://test_dir /tmp gzip=9
  
@@ -154,3 +154,8 @@ salt 'ubuntu-minion-001' cp.get_dir salt://test_dir /tmp gzip=9
 ll /tmp/test_dir/
  
 OK，目录同步成功。
+7. 远程批量执行
+格式：
+salt '<target>' <function> [argument]
+注： function是salt带的或自己写的可执行模块里面的function，自带的所有列表http://docs.saltstack.com/ref/modules/all/index.html?highlight=full%20list%20builtin 实例：
+salt '*' test.ping
