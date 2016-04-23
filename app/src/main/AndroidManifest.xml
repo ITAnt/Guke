@@ -15,6 +15,14 @@
             android:theme="@style/Theme.AppCompat.NoActionBar">
         </activity>
 
+        <activity android:name="com.tongcent.guke.activity.FeedbackActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+        </activity>
+
+        <activity android:name="com.tongcent.guke.activity.DonateActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+        </activity>
+
         <activity android:name="com.tongcent.guke.activity.SplashActivity"
             android:theme="@style/StartTheme">
             <intent-filter>
