@@ -1,39 +1,45 @@
 package com.tongcent.guke.activity;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
+import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.tongcent.guke.R;
-import com.tongcent.guke.adapter.PagerAdapter;
-import com.tongcent.guke.fragment.ClickFragment;
-import com.tongcent.guke.fragment.MeFragment;
-import com.tongcent.guke.fragment.SayFragment;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class MainActivity extends FragmentActivity {
-
-    private ViewPager vp_main;
-    private List<Fragment> mFragments;
-    private PagerAdapter mAdapter;
+public class MainActivity extends Activity implements View.OnClickListener {
+    private LinearLayout ll_feedback;
+    private LinearLayout ll_update;
+    private LinearLayout ll_donate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        vp_main = (ViewPager) findViewById(R.id.vp_main);
-        mFragments = new ArrayList<>();
-        mFragments.add(new SayFragment());
-        mFragments.add(new ClickFragment());
-        mFragments.add(new MeFragment());
-        mAdapter = new PagerAdapter(getSupportFragmentManager(), mFragments);
-        vp_main.setAdapter(mAdapter);
+        initComponent();
     }
 
+    private void initComponent() {
+        ll_feedback = (LinearLayout) findViewById(R.id.ll_feedback);
+        ll_feedback.setOnClickListener(this);
+        ll_update = (LinearLayout) findViewById(R.id.ll_update);
+        ll_update.setOnClickListener(this);
+        ll_donate = (LinearLayout) findViewById(R.id.ll_donate);
+        ll_donate.setOnClickListener(this);
+    }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.ll_feedback:
+                break;
+            case R.id.ll_update:
+                break;
+            case R.id.ll_donate:
+                break;
+            default:
+                break;
+        }
+    }
 }

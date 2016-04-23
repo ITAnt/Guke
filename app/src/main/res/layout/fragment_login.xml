@@ -1,0 +1,89 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/text_size_bottom_image"
+    android:orientation="vertical"
+    android:background="@color/color_white">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:background="@color/color_bg"
+        android:layout_marginBottom="@dimen/margin_bottom">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/text_size_title"
+            android:text="孤客"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_left"
+        android:layout_marginRight="@dimen/padding_right"
+        android:orientation="vertical"
+        android:background="@drawable/shape_rect"
+        android:layout_marginBottom="@dimen/text_size_bottom_image">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_left"
+            android:background="@color/color_transparent"
+            android:gravity="center"
+            android:textColor="@color/color_bg"
+            android:layout_margin="@dimen/padding_bottom"
+            android:hint="昵称|手机号"
+            android:textColorHint="@color/gray"
+            android:textSize="@dimen/text_size_content"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:background="@color/color_bg"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_left"
+            android:layout_margin="@dimen/padding_bottom"
+            android:background="@color/color_transparent"
+            android:gravity="center"
+            android:textColor="@color/color_bg"
+            android:hint="密码"
+            android:textColorHint="@color/gray"
+            android:textSize="@dimen/text_size_content"
+            android:inputType="textPassword"/>
+    </LinearLayout>
+
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_left"
+        android:layout_marginLeft="@dimen/padding_left"
+        android:layout_marginRight="@dimen/padding_right"
+        android:text="登  录"
+        android:shadowColor="@color/color_transparent"
+        android:gravity="center"
+        android:textColor="@color/color_bg"
+        android:background="@drawable/selector_button_rect"
+        android:minHeight="0dp"
+        android:layout_marginBottom="@dimen/padding_bottom"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_bg"
+        android:layout_marginLeft="@dimen/padding_left"
+        android:textSize="@dimen/text_size_bottom_text"
+        android:text="注册请向左滑动屏幕"/>
+
+</LinearLayout>

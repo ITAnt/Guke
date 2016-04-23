@@ -5,81 +5,305 @@
     android:orientation="vertical"
     android:background="@color/color_white">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vp_main"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/color_white">
-    </android.support.v4.view.ViewPager>
+        android:layout_height="@dimen/title_height"
+        android:background="@color/color_bg"
+        android:layout_marginBottom="@dimen/margin_bottom">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/text_size_title"
+            android:text="独孤九剑"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/shape_rect"
+        android:layout_marginLeft="@dimen/padding_left"
+        android:layout_marginRight="@dimen/padding_right"
+        android:padding="@dimen/padding_left"
+        android:layout_marginBottom="@dimen/margin_bottom">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/padding_left"
+            android:layout_marginRight="@dimen/padding_right"
+            android:layout_marginBottom="@dimen/padding_bottom">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="2016-04-20"
+                android:textColor="@color/color_bg"
+                android:textSize="@dimen/text_size_content"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="星期三"
+                android:textColor="@color/color_bg"
+                android:textSize="@dimen/text_size_content"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="农历三月十四"
+                android:textColor="@color/color_bg"
+                android:textSize="@dimen/text_size_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/padding_left"
+            android:layout_marginRight="@dimen/padding_right">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/padding_bottom">
+                <TextView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:text="宜"
+                    android:background="@drawable/shape_circle"
+                    android:textColor="@color/color_bg"
+                    android:textSize="@dimen/text_size_content"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/padding_left"
+                    android:text="祭祀 祈福 求嗣 斋醮 沐浴"
+                    android:textColor="@color/color_bg"
+                    android:textSize="@dimen/text_size_content"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:text="忌"
+                    android:background="@drawable/shape_circle"
+                    android:textColor="@color/color_bg"
+                    android:textSize="@dimen/text_size_content"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/padding_left"
+                    android:text="移徙 入宅 嫁娶 出行 安床"
+                    android:textColor="@color/color_bg"
+                    android:textSize="@dimen/text_size_content"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:background="@color/color_bg"
+        android:layout_marginBottom="@dimen/margin_bottom"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_left"
+        android:layout_marginLeft="@dimen/padding_left"
+        android:layout_marginRight="@dimen/padding_right"
+        android:text="第3名 | 共123人"
+        android:shadowColor="@color/color_transparent"
+        android:gravity="center"
+        android:textColor="@color/color_bg"
+        android:background="@drawable/selector_button_rect"
+        android:layout_marginBottom="@dimen/margin_bottom"
+        android:minHeight="0dp"/>
+
+    <Button
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:gravity="center"
+        android:text="122 / 1250"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/selector_circle"
+        android:textColor="@color/color_bg"
+        android:layout_marginBottom="@dimen/margin_bottom"
+        android:textSize="@dimen/text_size_title"
+        android:shadowColor="@color/color_transparent"/>
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/color_bg"/>
+
+    <LinearLayout
+        android:id="@+id/ll_feedback"
+        android:descendantFocusability="blocksDescendants"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/padding_left"
+        android:paddingRight="@dimen/padding_right"
+        android:paddingBottom="@dimen/padding_bottom"
+        android:paddingTop="@dimen/padding_bottom"
+        android:background="@drawable/selector_item">
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@mipmap/feedback"
+            android:scaleType="fitXY"
+            android:layout_marginRight="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_bg"
+            android:text="意见反馈"
+            android:layout_gravity="center_vertical"
+            android:textSize="@dimen/text_size_content"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@mipmap/go"/>
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/color_bg"/>
+
+    <LinearLayout
+        android:id="@+id/ll_update"
+        android:descendantFocusability="blocksDescendants"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/padding_left"
+        android:paddingRight="@dimen/padding_right"
+        android:paddingBottom="@dimen/padding_bottom"
+        android:paddingTop="@dimen/padding_bottom"
+        android:background="@drawable/selector_item">
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@mipmap/update"
+            android:scaleType="fitXY"
+            android:layout_marginRight="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_bg"
+            android:text="检查更新"
+            android:layout_gravity="center_vertical"
+            android:textSize="@dimen/text_size_content"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@mipmap/go"/>
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/color_bg"/>
+
+
+    <LinearLayout
+        android:id="@+id/ll_donate"
+        android:descendantFocusability="blocksDescendants"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/padding_left"
+        android:paddingRight="@dimen/padding_right"
+        android:paddingBottom="@dimen/padding_bottom"
+        android:paddingTop="@dimen/padding_bottom"
+        android:background="@drawable/selector_item">
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@mipmap/rmb"
+            android:scaleType="fitXY"
+            android:layout_marginRight="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_bg"
+            android:text="赞助一角"
+            android:layout_gravity="center_vertical"
+            android:textSize="@dimen/text_size_content"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@mipmap/go"/>
+    </LinearLayout>
+
+
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0.1dp"
         android:background="@color/color_bg"
-        android:layout_marginBottom="3dp"/>
-    <RelativeLayout
+        android:layout_marginBottom="@dimen/padding_bottom"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
-        android:paddingBottom="2dp">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="@dimen/text_size_bottom_image"
-                android:layout_height="@dimen/text_size_bottom_image"
-                android:scaleType="fitXY"
-                android:background="@mipmap/say_normal"/>
-
-            <TextView
-                android:textSize="@dimen/text_size_bottom_text"
-                android:gravity="center_horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/color_bg"
-                android:text="客说"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_centerInParent="true">
-            <ImageView
-                android:layout_width="@dimen/text_size_bottom_image"
-                android:layout_height="@dimen/text_size_bottom_image"
-                android:scaleType="fitXY"
-                android:background="@mipmap/click_normal"/>
-
-            <TextView
-                android:textSize="@dimen/text_size_bottom_text"
-                android:gravity="center_horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/color_bg"
-                android:text="点点"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_alignParentRight="true">
-            <ImageView
-                android:layout_width="@dimen/text_size_bottom_image"
-                android:layout_height="@dimen/text_size_bottom_image"
-                android:scaleType="fitXY"
-                android:background="@mipmap/me_normal"/>
-
-            <TextView
-                android:textSize="@dimen/text_size_bottom_text"
-                android:gravity="center_horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="我"
-                android:textColor="@color/color_bg"/>
-        </LinearLayout>
-    </RelativeLayout>
+        android:padding="@dimen/padding_left"
+        android:layout_marginLeft="@dimen/padding_left"
+        android:layout_marginRight="@dimen/padding_right"
+        android:text="退出登录"
+        android:shadowColor="@color/color_transparent"
+        android:gravity="center"
+        android:textColor="@color/color_bg"
+        android:background="@drawable/selector_button_rect"
+        android:layout_marginBottom="20dp"
+        android:minHeight="0dp"/>
 
 </LinearLayout>

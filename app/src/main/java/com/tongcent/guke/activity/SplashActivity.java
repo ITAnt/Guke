@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.tongcent.guke.R;
+import com.tongcent.guke.utils.GukeUtils;
 
 public class SplashActivity extends BaseActivity {
 
@@ -16,7 +17,11 @@ public class SplashActivity extends BaseActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                if (GukeUtils.getInstance().hasLogin(SplashActivity.this)) {
+                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                } else {
+                    startActivity(new Intent(SplashActivity.this, LoginOrRegisterActivity.class));
+                }
                 SplashActivity.this.finish();
             }
         }, 3500);

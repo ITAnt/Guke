@@ -10,4 +10,5 @@
     <color name="grey_light">#f4f7fa</color>
     <!-- 很淡灰色 -->
     <color name="grey_very_light">#33e2d6c9</color>
+    <color name="holo_blue">#FF33E5B5</color>
 </resources>
