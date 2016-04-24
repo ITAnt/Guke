@@ -12,12 +12,12 @@
         android:layout_marginBottom="@dimen/margin_bottom">
 
         <TextView
+            android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:textColor="@color/color_white"
-            android:textSize="@dimen/text_size_title"
-            android:text="独孤九剑"/>
+            android:textSize="@dimen/text_size_title"/>
 
     </RelativeLayout>
 
@@ -38,26 +38,25 @@
             android:layout_marginRight="@dimen/padding_right"
             android:layout_marginBottom="@dimen/padding_bottom">
             <TextView
+                android:id="@+id/tv_date"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="2016-04-20"
                 android:textColor="@color/color_bg"
                 android:textSize="@dimen/text_size_content"/>
 
             <TextView
+                android:id="@+id/tv_week"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="星期三"
                 android:textColor="@color/color_bg"
                 android:textSize="@dimen/text_size_content"/>
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:id="@+id/tv_luna"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="农历三月十四"
                 android:textColor="@color/color_bg"
                 android:textSize="@dimen/text_size_content"/>
         </LinearLayout>
@@ -72,7 +71,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/padding_bottom">
+                android:layout_marginBottom="@dimen/padding_bottom"
+                android:gravity="center_vertical">
                 <TextView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
@@ -83,11 +83,11 @@
                     android:textSize="@dimen/text_size_content"/>
 
                 <TextView
+                    android:id="@+id/tv_suit"
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:layout_marginLeft="@dimen/padding_left"
-                    android:text="祭祀 祈福 求嗣 斋醮 沐浴"
                     android:textColor="@color/color_bg"
                     android:textSize="@dimen/text_size_content"/>
             </LinearLayout>
@@ -96,7 +96,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
                 <TextView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
@@ -107,11 +108,11 @@
                     android:textSize="@dimen/text_size_content"/>
 
                 <TextView
+                    android:id="@+id/tv_avoid"
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:layout_marginLeft="@dimen/padding_left"
-                    android:text="移徙 入宅 嫁娶 出行 安床"
                     android:textColor="@color/color_bg"
                     android:textSize="@dimen/text_size_content"/>
             </LinearLayout>
@@ -140,11 +141,10 @@
         android:minHeight="0dp"/>
 
     <Button
-        android:layout_width="180dp"
-        android:layout_height="180dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:gravity="center"
         android:text="122 / 1250"
-        android:textStyle="bold"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/selector_circle"
         android:textColor="@color/color_bg"
@@ -254,7 +254,8 @@
         android:paddingRight="@dimen/padding_right"
         android:paddingBottom="@dimen/padding_bottom"
         android:paddingTop="@dimen/padding_bottom"
-        android:background="@drawable/selector_item">
+        android:background="@drawable/selector_item"
+        android:visibility="gone">
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
@@ -294,6 +295,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"/>
     <Button
+        android:id="@+id/btn_logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/padding_left"
@@ -306,5 +308,4 @@
         android:background="@drawable/selector_button_rect"
         android:layout_marginBottom="20dp"
         android:minHeight="0dp"/>
-
 </LinearLayout>

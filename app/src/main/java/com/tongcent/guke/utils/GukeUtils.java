@@ -19,9 +19,5 @@ public class GukeUtils {
         return GukeFactory.instance;
     }
 
-    public boolean hasLogin(Context context) {
-        SharedPreferences preferences = context.getSharedPreferences("config", Context.MODE_PRIVATE);
-        String user = preferences.getString("user", null);
-        return !TextUtils.isEmpty(user);
-    }
+
 }

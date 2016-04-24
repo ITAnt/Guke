@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/shape_rect">
+    android:background="@color/color_transparent">
 
 
     <com.tongcent.guke.view.LoadingView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:background="@drawable/shape_circle" />
+        android:id="@+id/lv_loading"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerInParent="true"/>
 
-</LinearLayout>
+
+</RelativeLayout>

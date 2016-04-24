@@ -30,7 +30,14 @@ public class LoadingView extends View {
         int width = getWidth();
         int height = getHeight();
         Paint paint = new Paint();
+        // 笔触颜色
         paint.setColor(Color.parseColor("#b2a07c"));
-        canvas.drawLine(width/2, height/2, width/2, 0, paint);
+        // 笔触粗细
+        paint.setStrokeWidth(5);
+        for (int i = 0; i < 12; i++) {
+            canvas.drawLine(width/2, height/3, width/2, height*23/60, paint);
+            canvas.rotate(30, width/2, height/2);
+        }
+
     }
 }
