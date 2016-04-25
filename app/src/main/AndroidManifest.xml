@@ -42,6 +42,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data android:value="571dbf28e0f55ac18f00104e" android:name="UMENG_APPKEY"></meta-data>
+        <meta-data android:value="Tongcent" android:name="UMENG_CHANNEL"/>
     </application>
 
 </manifest>

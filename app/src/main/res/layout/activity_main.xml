@@ -141,6 +141,7 @@
         android:minHeight="0dp"/>
 
     <Button
+        android:id="@+id/btn_circle"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:gravity="center"
@@ -201,7 +202,7 @@
         android:layout_height="0.1dp"
         android:background="@color/color_bg"/>
 
-    <LinearLayout
+    <!--<LinearLayout
         android:id="@+id/ll_update"
         android:descendantFocusability="blocksDescendants"
         android:layout_width="match_parent"
@@ -241,7 +242,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0.1dp"
-        android:background="@color/color_bg"/>
+        android:background="@color/color_bg"/>-->
 
 
     <LinearLayout
@@ -301,7 +302,7 @@
         android:padding="@dimen/padding_left"
         android:layout_marginLeft="@dimen/padding_left"
         android:layout_marginRight="@dimen/padding_right"
-        android:text="退出登录"
+        android:text="注销登录"
         android:shadowColor="@color/color_transparent"
         android:gravity="center"
         android:textColor="@color/color_bg"

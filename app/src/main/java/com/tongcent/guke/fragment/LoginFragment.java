@@ -15,8 +15,11 @@ import android.widget.Toast;
 import com.tongcent.guke.R;
 import com.tongcent.guke.activity.MainActivity;
 import com.tongcent.guke.bean.Person;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
@@ -30,6 +33,7 @@ public class LoginFragment extends Fragment {
 	private EditText et_phone;
 	private EditText et_pass;
 
+	private String PATTERN_PHONE = "(13\\d|14[57]|15[^4,\\D]|17[678]|18\\d)\\d{8}|170[059]\\d{7}";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -62,33 +66,47 @@ public class LoginFragment extends Fragment {
 						String pass = et_pass.getText().toString();
 
 						if (!TextUtils.isEmpty(phone) && !TextUtils.isEmpty(pass)) {
-							Person user = new Person();
-							user.setUsername(phone);
-							user.setPassword(pass);
-							user.login(mActivity, new SaveListener() {
-								@Override
-								public void onSuccess() {
-									// 校验成功并且保存用户数据到本地之后，跳转到主界面，并且把用户数据传递过去
-									Toast.makeText(mActivity, "登录成功", Toast.LENGTH_SHORT).show();
-									startActivity(new Intent(mActivity, MainActivity.class));
-									mActivity.finish();
-								}
+							Pattern r = Pattern.compile(PATTERN_PHONE);
+							Matcher m = r.matcher(phone);
+							boolean match = m.matches();
+							if (match) {
+								Person user = new Person();
+								user.setUsername(phone);
+								user.setPassword(pass);
+								user.login(mActivity, new SaveListener() {
+									@Override
+									public void onSuccess() {
+										// 校验成功并且保存用户数据到本地之后，跳转到主界面，并且把用户数据传递过去
+										Toast.makeText(mActivity, "登录成功", Toast.LENGTH_SHORT).show();
+										startActivity(new Intent(mActivity, MainActivity.class));
+										mActivity.finish();
+									}
 
-								@Override
-								public void onFailure(int i, String s) {
-									Toast.makeText(mActivity, "登录失败", Toast.LENGTH_SHORT).show();
-								}
-							});
-
+									@Override
+									public void onFailure(int i, String s) {
+										Toast.makeText(mActivity, "登录失败", Toast.LENGTH_SHORT).show();
+									}
+								});
+							} else {
+								Toast.makeText(mActivity, "请输入有效的手机号", Toast.LENGTH_SHORT).show();
+							}
 						} else {
 							Toast.makeText(mActivity, "请先填写手机号和密码", Toast.LENGTH_SHORT).show();
 						}
-
 						break;
 					default:
 						break;
 				}
 			}
 		});
+	}
+
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onPageStart("SignupSignin"); //统计页面，"MainScreen"为页面名称，可自定义
+	}
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPageEnd("SignupSignin");
 	}
 }

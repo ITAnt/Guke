@@ -19,72 +19,41 @@
             android:layout_centerInParent="true"
             android:textColor="@color/color_white"
             android:textSize="@dimen/text_size_title"
-            android:text="孤客"/>
+            android:text="意见反馈"
+            android:hint="您的意见..."/>
 
+        <Button
+            android:id="@+id/btn_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/padding_right"
+            android:text="发送"
+            android:textSize="@dimen/text_size_content"
+            android:textColor="@color/color_white"
+            android:background="@drawable/selector_button_send"/>
     </RelativeLayout>
 
-    <LinearLayout
+    <EditText
+        android:id="@+id/et_feedback"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginLeft="@dimen/padding_left"
         android:layout_marginRight="@dimen/padding_right"
-        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/padding_bottom"
         android:background="@drawable/shape_rect"
-        android:layout_marginBottom="@dimen/text_size_bottom_image">
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/padding_left"
-            android:background="@color/color_transparent"
-            android:gravity="center"
-            android:textColor="@color/color_bg"
-            android:layout_margin="@dimen/padding_bottom"
-            android:hint="昵称|手机号"
-            android:textColorHint="@color/gray"
-            android:textSize="@dimen/text_size_content"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.2dp"
-            android:background="@color/color_bg"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/padding_left"
-            android:layout_margin="@dimen/padding_bottom"
-            android:background="@color/color_transparent"
-            android:gravity="center"
-            android:textColor="@color/color_bg"
-            android:hint="密码"
-            android:textColorHint="@color/gray"
-            android:textSize="@dimen/text_size_content"
-            android:inputType="textPassword"/>
-    </LinearLayout>
-
-
-
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/padding_left"
-        android:layout_marginLeft="@dimen/padding_left"
-        android:layout_marginRight="@dimen/padding_right"
-        android:text="登  录"
-        android:shadowColor="@color/color_transparent"
-        android:gravity="center"
         android:textColor="@color/color_bg"
-        android:background="@drawable/selector_button_rect"
-        android:minHeight="0dp"
-        android:layout_marginBottom="@dimen/padding_bottom"/>
+        android:textSize="@dimen/text_size_content"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="您也可以把意见发送到964161472@qq.com"
         android:textColor="@color/color_bg"
-        android:layout_marginLeft="@dimen/padding_left"
         android:textSize="@dimen/text_size_bottom_text"
-        android:text="注册请向左滑动屏幕"/>
+        android:layout_marginBottom="@dimen/margin_bottom"
+        android:layout_marginLeft="@dimen/padding_left"/>
 
 </LinearLayout>

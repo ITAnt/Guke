@@ -6,6 +6,9 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
@@ -19,22 +22,26 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tongcent.guke.R;
 import com.tongcent.guke.bean.Person;
+import com.tongcent.guke.bean.SumClicks;
 import com.tongcent.guke.utils.TimeUtils;
 import com.tongcent.guke.view.LoadingView;
+import com.umeng.analytics.MobclickAgent;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.listener.GetListener;
+import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 public class MainActivity extends Activity implements View.OnClickListener {
     private Person mPerson;
-    private Button btn_ranking;
     private Dialog mDialog;
 
     private TextView tv_name;
-    private Button btn_logout;
 
     private LinearLayout ll_feedback;
     private LinearLayout ll_update;
@@ -46,12 +53,23 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private TextView tv_suit;
     private TextView tv_avoid;
 
+    private Button btn_ranking;
+    private Button btn_circle;
+    private Button btn_logout;
+
+    private Handler mSumHandler;
+    private Handler mRankHandler;
+    private boolean mContinue = true;
+    private volatile long mSumClicks = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         initComponent();
+        updateSumClicks();
+        updateRank();
     }
 
     private void initComponent() {
@@ -61,6 +79,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
             tv_name.setText(mPerson.getUsername());
         }
 
+        btn_ranking = (Button) findViewById(R.id.btn_ranking);
+        btn_ranking.setOnClickListener(this);
+        btn_circle = (Button) findViewById(R.id.btn_circle);
+        btn_circle.setOnClickListener(this);
         btn_logout = (Button) findViewById(R.id.btn_logout);
         btn_logout.setOnClickListener(this);
 
@@ -71,8 +93,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         ll_donate = (LinearLayout) findViewById(R.id.ll_donate);
         ll_donate.setOnClickListener(this);
 
-        btn_ranking = (Button) findViewById(R.id.btn_ranking);
-        btn_ranking.setOnClickListener(this);
+
 
         tv_date = (TextView) findViewById(R.id.tv_date);
         tv_week = (TextView) findViewById(R.id.tv_week);
@@ -89,13 +110,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
             case R.id.ll_feedback:
                 startActivity(new Intent(this, FeedbackActivity.class));
                 break;
-            case R.id.ll_update:
-                break;
             case R.id.ll_donate:
                 break;
             case R.id.btn_ranking:
                 showLoadingDialog(this);
                 // 当前用户的点击数+1，当前总数+1，提交给服务器
+                clickPlus();
+                break;
+
+            case R.id.btn_circle:
+                showLoadingDialog(this);
+                // 当前用户的点击数+1，当前总数+1，提交给服务器
+                clickPlus();
                 break;
 
             case R.id.btn_logout:
@@ -106,6 +132,195 @@ public class MainActivity extends Activity implements View.OnClickListener {
             default:
                 break;
         }
+    }
+
+    /*****************************************更新点击总数*************************************/
+    /**
+     * 不停去更新点击的总次数
+     */
+    private void updateSumClicks() {
+        // 一定要调用start方法，否则looper为null
+        mSumThread.start();
+        mSumHandler = new Handler(mSumThread.getLooper()) {
+            @Override
+            public void handleMessage(Message msg) {
+                // TODO Auto-generated method stub
+                super.handleMessage(msg);
+                //在这里更新UI
+            }
+        };
+        mSumHandler.post(mSumRunnable);
+    }
+
+    private Runnable mSumRunnable = new Runnable() {
+
+        @Override
+        public void run() {
+            // 去查询数据，查到之后发消息更新UI
+            BmobQuery<SumClicks> bmobQuery = new BmobQuery<SumClicks>();
+            bmobQuery.getObject(MainActivity.this, "wH1B777G", new GetListener<SumClicks>() {
+                @Override
+                public void onSuccess(SumClicks object) {
+                    // TODO Auto-generated method stub
+                    mSumClicks = object.getClicks();
+                }
+
+                @Override
+                public void onFailure(int code, String msg) {
+                    // TODO Auto-generated method stub
+                }
+
+                @Override
+                public void onFinish() {
+                    super.onFinish();
+                    mSumHandler.sendEmptyMessage(1);
+                    try {
+                        // 休眠1秒，如果还没销毁则继续查询
+                        Thread.sleep(1000);
+                        if (mContinue) {
+                            mSumHandler.post(mSumRunnable);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+    };
+
+    private SumThread mSumThread = new SumThread("connect-thread", Thread.MAX_PRIORITY);
+    private class SumThread extends HandlerThread implements Callback {
+
+        public SumThread(String name, int priority) {
+            super(name, priority);
+        }
+    }
+    /*****************************************更新点击总数*************************************/
+
+    /****************************************更新排名start****************************************/
+    /**
+     * 不停去更新排名
+     */
+    private void updateRank() {
+        // 一定要调用start方法，否则looper为null
+        mRankThread.start();
+        mRankHandler = new Handler(mRankThread.getLooper()) {
+            @Override
+            public void handleMessage(Message msg) {
+                // TODO Auto-generated method stub
+                super.handleMessage(msg);
+                //在这里更新UI
+            }
+        };
+        mRankHandler.post(mRankRunnable);
+    }
+
+    private Runnable mRankRunnable = new Runnable() {
+
+        @Override
+        public void run() {
+            // 去查询数据，查到之后发消息更新UI
+            BmobQuery<SumClicks> bmobQuery = new BmobQuery<SumClicks>();
+            bmobQuery.getObject(MainActivity.this, "wH1B777G", new GetListener<SumClicks>() {
+                @Override
+                public void onSuccess(SumClicks object) {
+                    // TODO Auto-generated method stub
+                    mSumClicks = object.getClicks();
+                }
+
+                @Override
+                public void onFailure(int code, String msg) {
+                    // TODO Auto-generated method stub
+                }
+
+                @Override
+                public void onFinish() {
+                    super.onFinish();
+                    mSumHandler.sendEmptyMessage(1);
+                    try {
+                        // 休眠1秒，如果还没销毁则继续查询
+                        Thread.sleep(1000);
+                        if (mContinue) {
+                            mSumHandler.post(mRankRunnable);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+    };
+
+    private RankThread mRankThread = new RankThread("connect-thread", Thread.MAX_PRIORITY);
+    private class RankThread extends HandlerThread implements Callback {
+
+        public RankThread(String name, int priority) {
+            super(name, priority);
+        }
+    }
+    /****************************************更新排名end******************************************/
+
+    /**
+     * 用户点击了一下，点击次数要自加
+     */
+    private void clickPlus() {
+        showLoadingDialog(this);
+        mPerson.setClickNum(mPerson.getClickNum() + 1);
+        mPerson.save(MainActivity.this, new SaveListener() {
+            @Override
+            public void onSuccess() {
+
+                Toast.makeText(MainActivity.this, "成功点击了一次", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                Toast.makeText(MainActivity.this, "本次点击未生效", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFinish() {
+                super.onFinish();
+
+                // 去查询数据，查到之后发消息更新UI
+                BmobQuery<SumClicks> bmobQuery = new BmobQuery<SumClicks>();
+                bmobQuery.getObject(MainActivity.this, "wH1B777G", new GetListener<SumClicks>() {
+                    @Override
+                    public void onSuccess(SumClicks object) {
+                        // TODO Auto-generated method stub
+                        mSumClicks = object.getClicks();
+                    }
+
+                    @Override
+                    public void onFailure(int code, String msg) {
+                        // TODO Auto-generated method stub
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        super.onFinish();
+                        // 更新总次数到服务器
+                        SumClicks sumClicks = new SumClicks();
+                        sumClicks.setClicks(mSumClicks+1);
+                        sumClicks.update(MainActivity.this, "wH1B777G", new UpdateListener() {
+                            @Override
+                            public void onSuccess() {
+                                mSumHandler.sendEmptyMessage(1);
+                            }
+                            @Override
+                            public void onFailure(int code, String msg) {
+                            }
+
+                            @Override
+                            public void onFinish() {
+                                super.onFinish();
+                                hideLoadingDialog();
+                            }
+                        });
+                    }
+                });
+            }
+        });
     }
 
     /**
@@ -145,7 +360,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            showLoadingDialog(MainActivity.this);
+            //showLoadingDialog(MainActivity.this);
         }
 
         @Override
@@ -200,9 +415,29 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
                 @Override
                 public void onFinished() {
-                    hideLoadingDialog();
+                    //hideLoadingDialog();
                 }
             });
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mContinue = false;
+        mSumHandler.removeCallbacks(mSumRunnable);
+        mRankHandler.removeCallbacks(mRankRunnable);
     }
 }

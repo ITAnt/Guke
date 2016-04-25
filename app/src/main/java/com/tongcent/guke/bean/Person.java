@@ -9,6 +9,15 @@ public class Person extends BmobUser {
 
     private String phoneNumber;
     private String thePassword;
+    private long clickNum;
+
+    public long getClickNum() {
+        return clickNum;
+    }
+
+    public void setClickNum(long clickNum) {
+        this.clickNum = clickNum;
+    }
 
     public String getPhoneNumber() {
         return phoneNumber;

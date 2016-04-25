@@ -7,6 +7,7 @@ import android.os.Handler;
 import com.tongcent.guke.R;
 import com.tongcent.guke.bean.Person;
 import com.tongcent.guke.utils.GukeUtils;
+import com.umeng.analytics.MobclickAgent;
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobUser;
@@ -32,5 +33,17 @@ public class SplashActivity extends BaseActivity {
                 SplashActivity.this.finish();
             }
         }, 3200);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

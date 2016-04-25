@@ -12,6 +12,7 @@ import com.tongcent.guke.R;
 import com.tongcent.guke.fragment.LoginFragment;
 import com.tongcent.guke.fragment.RegisterFragment;
 import com.tongcent.guke.view.JazzyViewPager;
+import com.umeng.analytics.MobclickAgent;
 import com.viewpagerindicator.LinePageIndicator;
 
 import java.util.ArrayList;
@@ -89,5 +90,17 @@ public class LoginOrRegisterActivity extends FragmentActivity {
             // TODO Auto-generated method stub
             return fragments.get(arg0);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

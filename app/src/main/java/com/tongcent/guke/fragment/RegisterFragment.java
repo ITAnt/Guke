@@ -15,8 +15,11 @@ import android.widget.Toast;
 import com.tongcent.guke.R;
 import com.tongcent.guke.activity.MainActivity;
 import com.tongcent.guke.bean.Person;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
@@ -30,6 +33,8 @@ public class RegisterFragment extends Fragment {
 	private EditText et_phone;
 	private EditText et_nickname;
 	private EditText et_pass;
+
+	private String PATTERN_PHONE = "(13\\d|14[57]|15[^4,\\D]|17[678]|18\\d)\\d{8}|170[059]\\d{7}";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,41 +61,49 @@ public class RegisterFragment extends Fragment {
 						final String pass = et_pass.getText().toString();
 
 						if (!TextUtils.isEmpty(phone) && !TextUtils.isEmpty(nickName) && !TextUtils.isEmpty(pass)) {
-							BmobQuery<Person> query = new BmobQuery<>();
-							query.addWhereEqualTo("phonenumber", phone);
-							query.findObjects(mActivity, new FindListener<Person>() {
-								@Override
-								public void onSuccess(List<Person> persons) {
-									if (persons != null && persons.size() == 1) {
-										Toast.makeText(mActivity, "该手机号已经注册过了", Toast.LENGTH_SHORT).show();
-									} else {
-										Person person = new Person();
-										person.setPhoneNumber(phone);
-										person.setThePassword(pass);
-										person.setPassword(pass);
-										person.setUsername(nickName);
+							Pattern r = Pattern.compile(PATTERN_PHONE);
+							Matcher m = r.matcher(phone);
+							boolean match = m.matches();
+							if (match) {
+								BmobQuery<Person> query = new BmobQuery<>();
+								query.addWhereEqualTo("phonenumber", phone);
+								query.findObjects(mActivity, new FindListener<Person>() {
+									@Override
+									public void onSuccess(List<Person> persons) {
+										if (persons != null && persons.size() == 1) {
+											Toast.makeText(mActivity, "该手机号已经注册过了", Toast.LENGTH_SHORT).show();
+										} else {
+											Person person = new Person();
+											person.setPhoneNumber(phone);
+											person.setThePassword(pass);
+											person.setPassword(pass);
+											person.setUsername(nickName);
+											person.setClickNum(0);
 
-										person.signUp(mActivity, new SaveListener() {
-											@Override
-											public void onSuccess() {
-												// 注册成功之后，保存数据到本地，并把用户数据传递到主界面
-												startActivity(new Intent(mActivity, MainActivity.class));
-												mActivity.finish();
-											}
+											person.signUp(mActivity, new SaveListener() {
+												@Override
+												public void onSuccess() {
+													// 注册成功之后，保存数据到本地，并把用户数据传递到主界面
+													startActivity(new Intent(mActivity, MainActivity.class));
+													mActivity.finish();
+												}
 
-											@Override
-											public void onFailure(int i, String s) {
-												Toast.makeText(mActivity, "注册失败", Toast.LENGTH_SHORT).show();
-											}
-										});
+												@Override
+												public void onFailure(int i, String s) {
+													Toast.makeText(mActivity, "注册失败", Toast.LENGTH_SHORT).show();
+												}
+											});
+										}
 									}
-								}
 
-								@Override
-								public void onError(int i, String s) {
-									Toast.makeText(mActivity, "注册失败", Toast.LENGTH_SHORT).show();
-								}
-							});
+									@Override
+									public void onError(int i, String s) {
+										Toast.makeText(mActivity, "注册失败", Toast.LENGTH_SHORT).show();
+									}
+								});
+							} else {
+								Toast.makeText(mActivity, "请输入有效的手机号", Toast.LENGTH_SHORT).show();
+							}
 						} else {
 							Toast.makeText(mActivity, "请完善信息", Toast.LENGTH_SHORT).show();
 						}
@@ -100,5 +113,14 @@ public class RegisterFragment extends Fragment {
 				}
 			}
 		});
+	}
+
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onPageStart("SignupSignin"); //统计页面，"MainScreen"为页面名称，可自定义
+	}
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPageEnd("SignupSignin");
 	}
 }
